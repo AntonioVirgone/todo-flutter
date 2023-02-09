@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:todo/component/menu/NavDrawer.dart';
 import 'package:todo/component/page/PageDrawer.dart';
-import 'package:todo/component/page/TodoItem.dart';
 
 void main() {
-  runApp(const MaterialApp(home: MyApp(),));
+  const String title = "Flutter Demo";
+
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: const MyApp(),
+    title: title,
+    theme: ThemeData(
+      primarySwatch: Colors.green,
+    ),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,41 +20,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyAppExample();
+    return const MyAppExample();
   }
 }
 
 class MyAppExample extends StatelessWidget {
-  static const String title = "Flutter Demo";
-
-  MyAppExample({super.key});
+  const MyAppExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: title,
-      theme: ThemeData(
-        primarySwatch: Colors.green,
+    return Scaffold(
+      appBar: AppBar(
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: const Icon(Icons.menu),
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
+          },
+        ),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(title),
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                icon: const Icon(Icons.menu),
-                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              );
-            },
-          ),
-        ),
-        body: PageDrawerImpl().build(context),
-        drawer: Drawer(
-          child: NavDrawerImpl('Antonio', 'test@mail.com').build(context),
-        ),
+      body: PageDrawer().build(context),
+      drawer: Drawer(
+        child: NavDrawerImpl('Antonio', 'test@mail.com').build(context),
       ),
     );
   }

@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'TodoItem.dart';
 
-abstract class PageDrawer {
-  Widget build(BuildContext context);
+class PageDrawer {
+  Widget build(BuildContext context) {
+    return PageDrawerImpl().build(context);
+  }
 }
 
-class PageDrawerImpl implements PageDrawer {
+class PageDrawerImpl {
   final List<TodoItem> items = List<TodoItem>.generate(
-    1000,
+    100,
         (i) => i % 6 == 0
         ? TodoItemHead('Todo Item Head $i')
         : TodoItemBody('Todo Item Body $i', 'Message body $i'),
