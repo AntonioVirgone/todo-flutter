@@ -2,23 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:todo/TodoItem.dart';
 
 void main() {
-  final items = List<TodoItem>.generate(
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MyAppExample();
+  }
+}
+
+class MyAppExample extends StatelessWidget {
+  static const String title = "Flutter Demo";
+
+  final List<TodoItem> items = List<TodoItem>.generate(
     1000,
     (i) => i % 6 == 0
         ? TodoItemStyle('Todo Item Head $i')
         : TodoItemContent('Todo Item Body $i', 'Message body $i'),
   );
 
-  runApp(MyApp(
-    items: items,
-  ));
-}
-
-class MyApp extends StatelessWidget {
-  static const String title = "Flutter Demo";
-  final List<TodoItem> items;
-
-  const MyApp({super.key, required this.items});
+  MyAppExample({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +36,17 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(title),
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
+                icon: const Icon(Icons.menu),
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
+          ),
         ),
         body: ListView.builder(
           itemCount: items.length,
