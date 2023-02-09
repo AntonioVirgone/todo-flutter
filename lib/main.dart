@@ -20,8 +20,8 @@ class MyAppExample extends StatelessWidget {
   final List<TodoItem> items = List<TodoItem>.generate(
     1000,
     (i) => i % 6 == 0
-        ? TodoItemStyle('Todo Item Head $i')
-        : TodoItemContent('Todo Item Body $i', 'Message body $i'),
+        ? TodoItemHead('Todo Item Head $i')
+        : TodoItemBody('Todo Item Body $i', 'Message body $i'),
   );
 
   MyAppExample({super.key});

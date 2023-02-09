@@ -6,16 +6,17 @@ abstract class TodoItem {
   Widget buildSubtitle(BuildContext context);
 }
 
-class TodoItemStyle implements TodoItem {
+class TodoItemHead implements TodoItem {
   final String heading;
 
-  TodoItemStyle(this.heading);
+  TodoItemHead(this.heading);
 
   @override
   Widget buildTitle(BuildContext context) {
     return Text(
       heading,
       style: Theme.of(context).textTheme.headlineSmall,
+      textAlign: TextAlign.center,
     );
   }
 
@@ -23,15 +24,21 @@ class TodoItemStyle implements TodoItem {
   Widget buildSubtitle(BuildContext context) => const SizedBox.shrink();
 }
 
-class TodoItemContent implements TodoItem {
+class TodoItemBody implements TodoItem {
   final String sender;
   final String body;
 
-  TodoItemContent(this.sender, this.body);
+  TodoItemBody(this.sender, this.body);
 
   @override
-  Widget buildTitle(BuildContext context) => Text(sender);
+  Widget buildTitle(BuildContext context) => Text(
+        sender,
+        textAlign: TextAlign.center,
+      );
 
   @override
-  Widget buildSubtitle(BuildContext context) => Text(body);
+  Widget buildSubtitle(BuildContext context) => Text(
+        body,
+        textAlign: TextAlign.center,
+      );
 }
