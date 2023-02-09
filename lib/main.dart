@@ -15,6 +15,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static const String title = "Flutter Demo";
   final List<TodoItem> items;
 
   const MyApp({super.key, required this.items});
@@ -22,13 +23,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: title,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Ciao"),
+          title: const Text(title),
         ),
         body: ListView.builder(
           itemCount: items.length,
