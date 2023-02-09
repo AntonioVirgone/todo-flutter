@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:todo/TodoItem.dart';
+import 'package:todo/component/menu/NavDrawer.dart';
+import 'package:todo/component/page/PageDrawer.dart';
+import 'package:todo/component/page/TodoItem.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MaterialApp(home: MyApp(),));
 }
 
 class MyApp extends StatelessWidget {
@@ -48,15 +50,9 @@ class MyAppExample extends StatelessWidget {
             },
           ),
         ),
-        body: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            final item = items[index];
-            return ListTile(
-              title: item.buildTitle(context),
-              subtitle: item.buildSubtitle(context),
-            );
-          },
+        body: PageDrawerImpl(items).buildPage(context),
+        drawer: Drawer(
+          child: NavDrawerImpl('Antonio', 'test@mail.com').buildItems(context),
         ),
       ),
     );

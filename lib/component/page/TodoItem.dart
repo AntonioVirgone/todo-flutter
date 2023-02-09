@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 abstract class TodoItem {
   Widget buildTitle(BuildContext context);
-
   Widget buildSubtitle(BuildContext context);
 }
 
