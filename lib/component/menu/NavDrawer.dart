@@ -3,9 +3,7 @@ import 'package:todo/component/menu/NavDrawerItem.dart';
 import 'package:todo/route/PageRoute.dart';
 
 abstract class NavDrawer {
-  Widget buildHeader(BuildContext context);
-
-  Widget buildItems(BuildContext context);
+  Widget build(BuildContext context);
 }
 
 class NavDrawerImpl implements NavDrawer {
@@ -14,8 +12,7 @@ class NavDrawerImpl implements NavDrawer {
 
   NavDrawerImpl(this.username, this.email);
 
-  @override
-  Widget buildHeader(BuildContext context) {
+  Widget buildHeader() {
     return UserAccountsDrawerHeader(
       accountName: Text(username),
       accountEmail: Text(email),
@@ -26,10 +23,10 @@ class NavDrawerImpl implements NavDrawer {
   }
 
   @override
-  Widget buildItems(BuildContext context) {
+  Widget build(BuildContext context) {
     return ListView(
       children: [
-        buildHeader(context),
+        buildHeader(),
         NavDrawerItem("PageOne", Icons.favorite, const FirstRoute()).buildItem(context),
         NavDrawerItem("PageTwo", Icons.comment, const SecondRoute()).buildItem(context),
         NavDrawerItem("PageTree", Icons.account_tree, const FirstRoute()).buildItem(context),

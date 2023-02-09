@@ -19,13 +19,6 @@ class MyApp extends StatelessWidget {
 class MyAppExample extends StatelessWidget {
   static const String title = "Flutter Demo";
 
-  final List<TodoItem> items = List<TodoItem>.generate(
-    1000,
-    (i) => i % 6 == 0
-        ? TodoItemHead('Todo Item Head $i')
-        : TodoItemBody('Todo Item Body $i', 'Message body $i'),
-  );
-
   MyAppExample({super.key});
 
   @override
@@ -50,9 +43,9 @@ class MyAppExample extends StatelessWidget {
             },
           ),
         ),
-        body: PageDrawerImpl(items).buildPage(context),
+        body: PageDrawerImpl().build(context),
         drawer: Drawer(
-          child: NavDrawerImpl('Antonio', 'test@mail.com').buildItems(context),
+          child: NavDrawerImpl('Antonio', 'test@mail.com').build(context),
         ),
       ),
     );
