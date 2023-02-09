@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:todo/TodoItem.dart';
 
 void main() {
-  runApp(const MyApp());
+  final items = List<TodoItem>.generate(
+    1000,
+    (i) => i % 6 == 0
+        ? TodoItemStyle('Todo Item Head $i')
+        : TodoItemContent('Todo Item Body $i', 'Message body $i'),
+  );
+
+  runApp(MyApp(
+    items: items,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final List<TodoItem> items;
+
+  const MyApp({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -14,73 +26,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  int _counter2 = 1;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-      _counter2 *= _counter;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Ciao"),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Ciao"),
+        ),
+        body: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            final item = items[index];
+            return ListTile(
+              title: item.buildTitle(context),
+              subtitle: item.buildSubtitle(context),
+            );
+          },
+        ),
       ),
-      body: Center(
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'ciao pippo:',
-                ),
-                Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const Text(
-                  'ciao pippo:',
-                ),
-                Text(
-                  '$_counter2',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-              ],
-            ),
-          ],
-        )
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
