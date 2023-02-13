@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/component/menu/NavDrawerItem.dart';
+import 'package:todo/component/page/LoginPage.dart';
 import 'package:todo/route/PageRoute.dart';
 
 abstract class NavDrawer {
@@ -27,10 +28,16 @@ class NavDrawerImpl implements NavDrawer {
     return ListView(
       children: [
         buildHeader(),
-        NavDrawerItem("PageOne", Icons.favorite, const FirstRoute()).buildItem(context),
-        NavDrawerItem("PageTwo", Icons.comment, const SecondRoute()).buildItem(context),
-        NavDrawerItem("PageTree", Icons.account_tree, const FirstRoute()).buildItem(context),
-        NavDrawerItem("PageFour", Icons.add_card, const SecondRoute()).buildItem(context),
+        NavDrawerItem("Login", Icons.favorite, const LoginRoute())
+            .buildItem(context),
+        NavDrawerItem("PageOne", Icons.favorite, const FirstRoute())
+            .buildItem(context),
+        NavDrawerItem("PageTwo", Icons.comment, const SecondRoute())
+            .buildItem(context),
+        NavDrawerItem("PageTree", Icons.account_tree, const FirstRoute())
+            .buildItem(context),
+        NavDrawerItem("PageFour", Icons.add_card, const SecondRoute())
+            .buildItem(context),
       ],
     );
   }
