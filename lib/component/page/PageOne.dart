@@ -27,39 +27,76 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('REST API Example'),
-      ),
-      body: _userModel == null || _userModel!.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: _userModel!.length,
-              itemBuilder: (context, index) {
-                return Card(
+        appBar: AppBar(
+          title: const Text('REST API Example'),
+        ),
+        body: _userModel == null || _userModel!.isEmpty
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : ListView.builder(
+                itemCount: _userModel!.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(_userModel![index].id.toString()),
+                            Text(_userModel![index].username),
+                            Text(_userModel![index].email),
+                            Text(_userModel![index].website),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+    );
+  }
+}
+
+class BottomSheetExample extends StatelessWidget {
+  const BottomSheetExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ElevatedButton(
+        child: const Text('showModalBottomSheet'),
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+                color: Colors.amber,
+                child: Center(
                   child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(_userModel![index].id.toString()),
-                          Text(_userModel![index].username),
-                          Text(_userModel![index].email),
-                          Text(_userModel![index].website),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text('Modal BottomSheet'),
+                      ElevatedButton(
+                        child: const Text('Close BottomSheet'),
+                        onPressed: () => Navigator.pop(context),
                       ),
                     ],
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
